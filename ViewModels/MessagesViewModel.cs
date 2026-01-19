@@ -29,17 +29,19 @@ namespace AIGruppÖvning.ViewModels
         {
             messages.Add(new Message() {
 				MessageId = 1, 
-				SenderId = (int)UserType.Human, 
+				SenderId = (int)UserType.CPU, 
 				Content = "Hej", 
 				Timestamp = DateTime.Now
 			});
-
 			AddCommand = new DelegateCommand(AddMessage);
         }
 
         public void AddMessage(object? parameter)
 		{
-			var message = new Message() { Content = "Hej igen" };
+			var message = new Message() { 
+				Content = "Hej igen",
+				SenderId = (int)UserType.Human,
+			};
 			messages.Add(message);
 			RaisePropertyChanged();
         }
