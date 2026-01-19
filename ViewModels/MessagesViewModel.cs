@@ -58,11 +58,9 @@ namespace AIGruppÖvning.ViewModels
 
         public void AddMessage(object? parameter)
 		{
-			var message = new Message() { 
-				Content = "Hej igen",
-				SenderId = (int)UserType.Human,
-			};
-			messages.Add(message);
+			if (parameter == null)
+				return;
+			messages.Add((Message)parameter);
 			RaisePropertyChanged();
         }
 
