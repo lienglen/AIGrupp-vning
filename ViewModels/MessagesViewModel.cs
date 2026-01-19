@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AIGruppÖvning.ViewModels
 {
-    internal class MessageViewModel
+    internal class MessagesViewModel
     {
     }
 }
