@@ -57,27 +57,15 @@ namespace AIGruppÖvning.ViewModels
             AddMessage(message);
         }
 
-  //      public void AddMessage(object? parameter)
-		//{
-		//	var message = new Message() { 
-		//		Content = "Hej igen",
-		//		SenderId = (int)UserType.Human,
-		//	};
-		//	messages.Add(message);
-		//	RaisePropertyChanged();
-  //      }
-        private readonly OpenAiChatService _chatService;
-
+        private readonly OpenAiChatService _chatService = new(new AzureOpenAiSettings());
 
         public async void AddMessage(object? parameter)
         {
-            // Skapa nytt meddelande från UI
-            var userMessage = new Message
-            {
-                Role = "user",
-                Content = "Hej från användaren!", // t.ex. parameter som text
-                Timestamp = DateTime.Now
-            };
+            if (parameter == null)
+                return;
+
+            // Skapa nytt meddelande från UI input i inparametern
+            Message userMessage = (Message)parameter;
 
             // Lägg till i ObservableCollection för UI
             messages.Add(userMessage);
@@ -98,22 +86,6 @@ namespace AIGruppÖvning.ViewModels
 
             RaisePropertyChanged();
         }
-
-        //      public void AddMessage(object? parameter)
-        //{
-        //	var message = new Message() { 
-        //		Content = "Hej igen",
-        //		SenderId = (int)UserType.Human,
-        //	};
-        //	messages.Add(message);
-
-        //          var list = new List<OpenAI.Chat.ChatMessage>
-        //          {
-        //              new UserChatMessage(messages)
-        //          };
-
-        //          RaisePropertyChanged();
-        //      }
 
         public void ClearChat()
 		{
