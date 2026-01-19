@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using AIGruppÖvning.Command;
+using AIGruppÖvning.Enums;
 using AIGruppÖvning.Models;
 using OpenAI.Chat;
 
