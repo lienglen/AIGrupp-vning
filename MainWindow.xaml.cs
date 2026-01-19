@@ -34,7 +34,12 @@ namespace AIGruppÖvning
 
         private void SendMessageButton_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.AddMessage("Blah blah blah");
+            string inputText = InputText.Text.Trim();
+            if (inputText.Length == 0)
+                return;
+            InputText.Text = string.Empty;
+            viewModel.AddHumanMessage(inputText);
+            viewModel.AddCpuMessage("Hmm... jag vet inte...");
         }
     }
 }
