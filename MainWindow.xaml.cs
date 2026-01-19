@@ -30,5 +30,10 @@ namespace AIGruppÖvning
         {
             await viewModel.LoadAsync(); 
         }
+
+        private void SendMessageButton_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.AddMessage("Blah blah blah");
+        }
     }
 }
