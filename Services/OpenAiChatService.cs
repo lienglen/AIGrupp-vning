@@ -4,6 +4,7 @@ using OpenAI.Chat;
 using AIGruppÖvning.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AIGruppÖvning.Enums;
 
 public class OpenAiChatService
 {
@@ -28,9 +29,9 @@ public class OpenAiChatService
         // Konvertera vår UI/DB-modell till SDK-meddelanden
         foreach (var msg in messages)
         {
-            if (msg.Role == "user")
+            if (msg.SenderId == (int)UserType.Human)
                 chatMessages.Add(new UserChatMessage(msg.Content));
-            else if (msg.Role == "assistant")
+            else if (msg.SenderId == (int)UserType.CPU)
                 chatMessages.Add(new AssistantChatMessage(msg.Content));
         }
 

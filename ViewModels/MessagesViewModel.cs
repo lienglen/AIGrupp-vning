@@ -79,7 +79,7 @@ namespace AIGruppÖvning.ViewModels
             // Lägg till AI:s svar i ObservableCollection
             messages.Add(new Message
             {
-                Role = "assistant",
+                SenderId = (int)UserType.CPU,
                 Content = reply,
                 Timestamp = DateTime.Now
             });
