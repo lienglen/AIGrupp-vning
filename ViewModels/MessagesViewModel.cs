@@ -1,4 +1,5 @@
 ﻿using AIGruppÖvning.Command;
+using AIGruppÖvning.Enums;
 using AIGruppÖvning.Models;
 using System;
 using System.Collections.Generic;
@@ -26,14 +27,21 @@ namespace AIGruppÖvning.ViewModels
 
         public MessagesViewModel()
         {
-            messages.Add(new Message() {MessageId = 1, SenderId = 1, Content = "Hej", Timestamp = DateTime.Now});
-
+            messages.Add(new Message() {
+				MessageId = 1, 
+				SenderId = (int)UserType.CPU, 
+				Content = "Hej", 
+				Timestamp = DateTime.Now
+			});
 			AddCommand = new DelegateCommand(AddMessage);
         }
 
         public void AddMessage(object? parameter)
 		{
-			var message = new Message() { Content = "Hej igen" };
+			var message = new Message() { 
+				Content = "Hej igen",
+				SenderId = (int)UserType.Human,
+			};
 			messages.Add(message);
 			RaisePropertyChanged();
         }
