@@ -18,13 +18,16 @@
         <StackPanel
             Grid.Row="1"
             Orientation="Horizontal">
-            <TextBox>
+            <TextBox Padding="5"
+                     Margin="5"
+                     Width="600">
                 
             </TextBox>
 
             <Button
             Content="Skicka"
-            Click="SendMessageButton_Click" />
+            Click="SendMessageButton_Click"
+            Padding="5"/>
 
         </StackPanel>
 
