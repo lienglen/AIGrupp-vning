@@ -30,6 +30,7 @@ namespace AIGruppÖvning.ViewModels
         {
 			AddCpuMessage("Hej och välkommen!");
 			AddCommand = new DelegateCommand(AddMessage);
+            AzureOpenAiSettings settings = new() { Endpoint = "https://brizadopenai.openai.azure.com/", ApiKey = "", DeploymentName = "gpt-5-utbildning" };
         }
 
 		public void AddHumanMessage(string messageText)
@@ -56,15 +57,6 @@ namespace AIGruppÖvning.ViewModels
             AddMessage(message);
         }
 
-        public void AddMessage(object? parameter)
-		{
-			if (parameter == null)
-				return;
-			messages.Add((Message)parameter);
-			RaisePropertyChanged();
-        }
-
-
   //      public void AddMessage(object? parameter)
 		//{
 		//	var message = new Message() { 
@@ -72,16 +64,58 @@ namespace AIGruppÖvning.ViewModels
 		//		SenderId = (int)UserType.Human,
 		//	};
 		//	messages.Add(message);
-
-  //          var list = new List<OpenAI.Chat.ChatMessage>
-  //          {
-  //              new UserChatMessage(messages)
-  //          };
-
-  //          RaisePropertyChanged();
+		//	RaisePropertyChanged();
   //      }
+        private readonly OpenAiChatService _chatService;
 
-		public void ClearChat()
+
+        public async void AddMessage(object? parameter)
+        {
+            // Skapa nytt meddelande från UI
+            var userMessage = new Message
+            {
+                Role = "user",
+                Content = "Hej från användaren!", // t.ex. parameter som text
+                Timestamp = DateTime.Now
+            };
+
+            // Lägg till i ObservableCollection för UI
+            messages.Add(userMessage);
+
+            // Konvertera till SDK-typ (UserChatMessage)
+            var sdkMessage = new UserChatMessage(userMessage.Content);
+
+            // Skicka till OpenAiChatService
+            string reply = await _chatService.SendMessageAsync(messages); // Service konverterar hela listan
+
+            // Lägg till AI:s svar i ObservableCollection
+            messages.Add(new Message
+            {
+                Role = "assistant",
+                Content = reply,
+                Timestamp = DateTime.Now
+            });
+
+            RaisePropertyChanged();
+        }
+
+        //      public void AddMessage(object? parameter)
+        //{
+        //	var message = new Message() { 
+        //		Content = "Hej igen",
+        //		SenderId = (int)UserType.Human,
+        //	};
+        //	messages.Add(message);
+
+        //          var list = new List<OpenAI.Chat.ChatMessage>
+        //          {
+        //              new UserChatMessage(messages)
+        //          };
+
+        //          RaisePropertyChanged();
+        //      }
+
+        public void ClearChat()
 		{
 			messages.Clear();
 			RaisePropertyChanged();
