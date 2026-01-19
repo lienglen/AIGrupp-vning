@@ -27,49 +27,42 @@ namespace AIGruppÖvning.ViewModels
 
         public MessagesViewModel()
         {
-            messages.Add(new Message() {
-				MessageId = 1, 
-				SenderId = (int)UserType.CPU, 
-				Content = "Hej", 
-				Timestamp = DateTime.Now
-			});
+			AddCpuMessage("Hej och välkommen!");
 			AddCommand = new DelegateCommand(AddMessage);
-
-            AzureOpenAiSettings settings = new() { Endpoint = "https://brizadopenai.openai.azure.com/", ApiKey = "", DeploymentName = "gpt-5-utbildning" };
-            _chatService = new OpenAiChatService(settings);
         }
 
-        private readonly OpenAiChatService _chatService;
+		public void AddHumanMessage(string messageText)
+		{
+			Message message = new()
+			{
+				MessageId = 1,
+				SenderId = (int)UserType.Human,
+				Content = "Du skriver: " + messageText,
+				Timestamp = DateTime.Now,
+			};
+			AddMessage(message);
+		}
 
-
-        public async void AddMessage(object? parameter)
-        {
-            // Skapa nytt meddelande från UI
-            var userMessage = new Message
+		public void AddCpuMessage(string messageText)
+		{
+            Message message = new()
             {
-                Role = "user",
-                Content = "Hej från användaren!", // t.ex. parameter som text
-                Timestamp = DateTime.Now
+                MessageId = 1,
+                SenderId = (int)UserType.CPU,
+                Content = "CPU säger: " + messageText,
+                Timestamp = DateTime.Now,
             };
+            AddMessage(message);
+        }
 
-            // Lägg till i ObservableCollection för UI
-            messages.Add(userMessage);
-
-            // Konvertera till SDK-typ (UserChatMessage)
-            var sdkMessage = new UserChatMessage(userMessage.Content);
-
-            // Skicka till OpenAiChatService
-            string reply = await _chatService.SendMessageAsync(messages); // Service konverterar hela listan
-
-            // Lägg till AI:s svar i ObservableCollection
-            messages.Add(new Message
-            {
-                Role = "assistant",
-                Content = reply,
-                Timestamp = DateTime.Now
-            });
-
-            RaisePropertyChanged();
+        public void AddMessage(object? parameter)
+		{
+			var message = new Message() { 
+				Content = "Hej igen",
+				SenderId = (int)UserType.Human,
+			};
+			messages.Add(message);
+			RaisePropertyChanged();
         }
 
 
