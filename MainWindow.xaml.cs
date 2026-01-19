@@ -39,7 +39,7 @@ namespace AIGruppÖvning
                 return;
             InputText.Text = string.Empty;
             viewModel.AddHumanMessage(inputText);
-            viewModel.AddCpuMessage("Hmm... jag vet inte...");
+            viewModel.AddCpuReply(inputText);
         }
     }
 }

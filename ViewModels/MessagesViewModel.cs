@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using AIGruppÖvning.Command;
+﻿using AIGruppÖvning.Command;
 using AIGruppÖvning.Enums;
 using AIGruppÖvning.Models;
 using OpenAI.Chat;
+using System.Collections.ObjectModel;
 
 namespace AIGruppÖvning.ViewModels
 {
@@ -28,7 +22,6 @@ namespace AIGruppÖvning.ViewModels
 
         public MessagesViewModel()
         {
-			AddCpuMessage("Hej och välkommen!");
 			AddCommand = new DelegateCommand(AddMessage);
             AzureOpenAiSettings settings = new() { Endpoint = "https://brizadopenai.openai.azure.com/", ApiKey = "", DeploymentName = "gpt-5-utbildning" };
         }
@@ -39,50 +32,42 @@ namespace AIGruppÖvning.ViewModels
 			{
 				MessageId = 1,
 				Sender = UserType.Human,
-				Content = "Du skriver: " + messageText,
+				Content = "--- " + messageText + " ---",
 				Timestamp = DateTime.Now,
 			};
 			AddMessage(message);
 		}
 
-		public void AddCpuMessage(string messageText)
-		{
-            Message message = new()
-            {
-                MessageId = 1,
-                Sender = UserType.CPU,
-                Content = "CPU säger: " + messageText,
-                Timestamp = DateTime.Now,
-            };
-            AddMessage(message);
-        }
-
         private readonly OpenAiChatService _chatService = new(new AzureOpenAiSettings());
 
-        public async void AddMessage(object? parameter)
-        {
-            if (parameter == null)
-                return;
-
-            // Skapa nytt meddelande från UI input i inparametern
-            Message userMessage = (Message)parameter;
-
-            // Lägg till i ObservableCollection för UI
-            messages.Add(userMessage);
-
+        public async void AddCpuReply(string messageText)
+		{
             // Konvertera till SDK-typ (UserChatMessage)
-            var sdkMessage = new UserChatMessage(userMessage.Content);
+            var sdkMessage = new UserChatMessage(messageText);
 
             // Skicka till OpenAiChatService
             string reply = await _chatService.SendMessageAsync(messages); // Service konverterar hela listan
 
             // Lägg till AI:s svar i ObservableCollection
-            messages.Add(new Message
+            Message message = new()
             {
                 Sender = UserType.CPU,
                 Content = reply,
                 Timestamp = DateTime.Now
-            });
+            };
+            AddMessage(message);
+        }
+
+        public void AddMessage(object? parameter)
+        {
+            if (parameter == null)
+                return;
+
+            // Skapa nytt meddelande från inparameter
+            Message message = (Message)parameter;
+
+            // Lägg till i ObservableCollection för UI
+            messages.Add(message);
 
             RaisePropertyChanged();
         }
