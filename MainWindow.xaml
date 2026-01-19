@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AIGruppÖvning"
+        xmlns:local="clr-namespace:AIGruppÖvning" xmlns:viewmodels="clr-namespace:AIGruppÖvning.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MessagesViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
