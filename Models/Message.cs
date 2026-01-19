@@ -14,6 +14,4 @@ namespace AIGruppÖvning.Models
         public DateTime Timestamp { get; set; }
         public string Role { get; set; }         
     }
-
-}
 }
