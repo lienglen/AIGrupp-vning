@@ -10,7 +10,7 @@ namespace AIGruppÖvning
     /// </summary>
     public partial class App : Application
     {
-        public static IConfiguration Config { get; private set; }
+        public static IConfiguration Config { get; private set; } = null!;
 
         protected override void OnStartup(StartupEventArgs e)
         {

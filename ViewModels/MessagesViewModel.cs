@@ -20,5 +20,22 @@ namespace AIGruppÖvning.ViewModels
 			}
 		}
 
-	}
+		public void AddMessage(Message message)
+		{
+			messages.Add(message);
+			RaisePropertyChanged(nameof(Messages));
+        }
+
+		public void ClearChat()
+		{
+			messages.Clear();
+			RaisePropertyChanged(nameof(Messages));
+        }
+
+        public async Task LoadAsync()
+        {
+            if (Messages.Any())
+				return;
+        }
+    }
 }
