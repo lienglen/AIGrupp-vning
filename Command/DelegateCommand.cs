@@ -22,12 +22,19 @@ namespace AIGruppÖvning.Command
 
         public bool CanExecute(object? parameter)
         {
-            throw new NotImplementedException();
+            if (parameter == null)
+            {
+                return true;
+            }
+            else
+            {
+                return canExecute(parameter);
+            }
         }
 
         public void Execute(object? parameter)
         {
-            throw new NotImplementedException();
+            execute(parameter);
         }
     }
 }
