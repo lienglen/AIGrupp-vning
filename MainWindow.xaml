@@ -25,7 +25,12 @@
             <Button
             Content="Skicka"
             Click="SendMessageButton_Click"
-            Padding="5"/>
+            Padding="5"
+            Margin="5"/>
+            <Button
+                Content="Rensa"
+                Padding="5"
+                Margin="5"/>
 
         </StackPanel>
 
