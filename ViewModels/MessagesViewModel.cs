@@ -15,7 +15,9 @@ namespace AIGruppÖvning.ViewModels
 		public ObservableCollection<Message> Messages
 		{
 			get { return messages; }
-			set { messages = value; }
+			set { messages = value;
+				RaisePropertyChanged();
+			}
 		}
 
 		public void AddMessage(Message message)

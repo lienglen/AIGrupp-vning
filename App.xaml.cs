@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -9,6 +10,18 @@ namespace AIGruppÖvning
     /// </summary>
     public partial class App : Application
     {
+        public static IConfiguration Config { get; private set; } = null!;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            Config = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.Development.json", optional: true)
+                .Build();
+        }
     }
 
 }
