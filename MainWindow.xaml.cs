@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using AIGruppÖvning.ViewModels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +17,18 @@ namespace AIGruppÖvning
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MessagesViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
+            viewModel = new MessagesViewModel();
+            DataContext = viewModel;
+            Loaded += MainWindow_Loaded;
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await viewModel.LoadAsync(); 
         }
     }
 }

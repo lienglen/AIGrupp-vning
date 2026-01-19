@@ -30,5 +30,10 @@ namespace AIGruppÖvning.ViewModels
 			RaisePropertyChanged(nameof(Messages));
         }
 
+        public async Task LoadAsync()
+        {
+            if (Messages.Any())
+				return;
+        }
     }
 }
