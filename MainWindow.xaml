@@ -15,16 +15,18 @@
             ItemsSource="{Binding Messages}"
             DisplayMemberPath="Content">
         </ListView>
-        <TextBox
+        <StackPanel
             Grid.Row="1"
-            Height="50">
-            
-        </TextBox>
+            Orientation="Horizontal">
+            <TextBox>
+                
+            </TextBox>
 
-        <Button
-            Grid.Row="1"
+            <Button
             Content="Skicka"
             Click="SendMessageButton_Click" />
+
+        </StackPanel>
 
     </Grid>
 </Window>
