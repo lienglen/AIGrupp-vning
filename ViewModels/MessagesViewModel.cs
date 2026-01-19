@@ -33,7 +33,7 @@ namespace AIGruppÖvning.ViewModels
 
         public void AddMessage(object? parameter)
 		{
-			var message = new Message();
+			var message = new Message() { Content = "Hej igen" };
 			messages.Add(message);
 			RaisePropertyChanged();
         }
