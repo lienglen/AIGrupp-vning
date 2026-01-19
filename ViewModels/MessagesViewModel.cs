@@ -38,7 +38,7 @@ namespace AIGruppÖvning.ViewModels
 			Message message = new()
 			{
 				MessageId = 1,
-				SenderId = (int)UserType.Human,
+				Sender = UserType.Human,
 				Content = "Du skriver: " + messageText,
 				Timestamp = DateTime.Now,
 			};
@@ -50,7 +50,7 @@ namespace AIGruppÖvning.ViewModels
             Message message = new()
             {
                 MessageId = 1,
-                SenderId = (int)UserType.CPU,
+                Sender = UserType.CPU,
                 Content = "CPU säger: " + messageText,
                 Timestamp = DateTime.Now,
             };
@@ -79,7 +79,7 @@ namespace AIGruppÖvning.ViewModels
             // Lägg till AI:s svar i ObservableCollection
             messages.Add(new Message
             {
-                SenderId = (int)UserType.CPU,
+                Sender = UserType.CPU,
                 Content = reply,
                 Timestamp = DateTime.Now
             });

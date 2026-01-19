@@ -29,9 +29,9 @@ public class OpenAiChatService
         // Konvertera vår UI/DB-modell till SDK-meddelanden
         foreach (var msg in messages)
         {
-            if (msg.SenderId == (int)UserType.Human)
+            if (msg.Sender == UserType.Human)
                 chatMessages.Add(new UserChatMessage(msg.Content));
-            else if (msg.SenderId == (int)UserType.CPU)
+            else if (msg.Sender == UserType.CPU)
                 chatMessages.Add(new AssistantChatMessage(msg.Content));
         }
 
