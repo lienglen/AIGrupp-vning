@@ -10,5 +10,5 @@ Each developer:
 4. appsettings.Development.json >> Properties >> Copy to Output Directory >> "Copy if newer".
 
 ## Examples of fetching data from appsettings
-string baseUrl = App.Config["ExternalApi:BaseUrl"];
-string apiKey  = App.Config["ExternalApi:ApiKey"];
+- string baseUrl = App.Config["ExternalApi:BaseUrl"];
+- string apiKey  = App.Config["ExternalApi:ApiKey"];
