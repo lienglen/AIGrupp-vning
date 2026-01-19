@@ -36,17 +36,36 @@ namespace AIGruppÖvning.ViewModels
 			AddCommand = new DelegateCommand(AddMessage);
         }
 
+		public void AddHumanMessage(string messageText)
+		{
+			Message message = new()
+			{
+				MessageId = 1,
+				SenderId = (int)UserType.Human,
+				Content = "Du skriver: " + messageText,
+				Timestamp = DateTime.Now,
+			};
+			AddMessage(message);
+		}
+
+		public void AddCpuMessage(string messageText)
+		{
+            Message message = new()
+            {
+                MessageId = 1,
+                SenderId = (int)UserType.CPU,
+                Content = "CPU svarar: " + messageText,
+                Timestamp = DateTime.Now,
+            };
+            AddMessage(message);
+        }
+
         public void AddMessage(object? parameter)
 		{
 			if (parameter == null)
 				return;
 
-			string messageContent = (string)parameter;
-			var message = new Message() { 
-				Content = messageContent,
-				SenderId = (int)UserType.Human,
-			};
-			messages.Add(message);
+			messages.Add((Message)parameter);
 			RaisePropertyChanged();
         }
 

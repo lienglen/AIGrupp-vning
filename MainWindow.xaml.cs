@@ -38,7 +38,8 @@ namespace AIGruppÖvning
             if (inputText.Length == 0)
                 return;
             InputText.Text = string.Empty;
-            viewModel.AddMessage(inputText);
+            viewModel.AddHumanMessage(inputText);
+            viewModel.AddCpuMessage("Hmm... jag vet inte...");
         }
     }
 }
