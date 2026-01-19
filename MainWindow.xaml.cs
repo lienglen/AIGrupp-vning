@@ -1,4 +1,5 @@
-﻿using AIGruppÖvning.ViewModels;
+﻿using AIGruppÖvning.Models;
+using AIGruppÖvning.ViewModels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;

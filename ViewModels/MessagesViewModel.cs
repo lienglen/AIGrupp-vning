@@ -38,8 +38,12 @@ namespace AIGruppÖvning.ViewModels
 
         public void AddMessage(object? parameter)
 		{
+			if (parameter == null)
+				return;
+
+			string messageContent = (string)parameter;
 			var message = new Message() { 
-				Content = "Hej igen",
+				Content = messageContent,
 				SenderId = (int)UserType.Human,
 			};
 			messages.Add(message);
