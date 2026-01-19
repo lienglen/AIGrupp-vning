@@ -19,7 +19,7 @@ namespace AIGruppÖvning
             Config = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile("appsettings.Development.json")
+                .AddJsonFile("appsettings.Development.json", optional: true)
                 .Build();
         }
     }
