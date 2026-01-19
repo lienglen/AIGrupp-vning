@@ -27,12 +27,7 @@ namespace AIGruppÖvning.ViewModels
 
         public MessagesViewModel()
         {
-            messages.Add(new Message() {
-				MessageId = 1, 
-				SenderId = (int)UserType.CPU, 
-				Content = "Hej", 
-				Timestamp = DateTime.Now
-			});
+			AddCpuMessage("Hej och välkommen!");
 			AddCommand = new DelegateCommand(AddMessage);
         }
 
@@ -54,7 +49,7 @@ namespace AIGruppÖvning.ViewModels
             {
                 MessageId = 1,
                 SenderId = (int)UserType.CPU,
-                Content = "CPU svarar: " + messageText,
+                Content = "CPU säger: " + messageText,
                 Timestamp = DateTime.Now,
             };
             AddMessage(message);
