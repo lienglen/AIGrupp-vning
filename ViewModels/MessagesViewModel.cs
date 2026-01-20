@@ -42,9 +42,6 @@ namespace AIGruppÖvning.ViewModels
 
         public async void AddCpuReply(string messageText)
 		{
-            // Konvertera till SDK-typ (UserChatMessage)
-            var sdkMessage = new UserChatMessage(messageText);
-
             // Skicka till OpenAiChatService
             string reply = await _chatService.SendMessageAsync(messages); // Service konverterar hela listan
 
