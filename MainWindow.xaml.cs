@@ -18,7 +18,7 @@ namespace AIGruppÖvning
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MessagesViewModel viewModel;
+        private readonly MessagesViewModel viewModel;
         public MainWindow()
         {
             InitializeComponent();
