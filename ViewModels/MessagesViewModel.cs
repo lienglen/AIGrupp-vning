@@ -40,7 +40,7 @@ namespace AIGruppÖvning.ViewModels
 
         private readonly OpenAiChatService _chatService = new(new AzureOpenAiSettings());
 
-        public async void AddCpuReply(string messageText)
+        public async void AddCpuReply()
 		{
             // Skicka till OpenAiChatService
             string reply = await _chatService.SendMessageAsync(messages); // Service konverterar hela listan
