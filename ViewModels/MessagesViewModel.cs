@@ -26,16 +26,16 @@ namespace AIGruppÖvning.ViewModels
             AzureOpenAiSettings settings = new() { Endpoint = "https://brizadopenai.openai.azure.com/", ApiKey = "", DeploymentName = "gpt-5-utbildning" };
         }
 
-		public void AddHumanMessage(string messageText)
+		public void AddHumanMessage(string humanMessageText)
 		{
-			Message message = new()
+			Message humanMessage = new()
 			{
 				MessageId = 1,
 				Sender = UserType.Human,
-				Content = "--- " + messageText + " ---",
+				Content = "--- " + humanMessageText + " ---",
 				Timestamp = DateTime.Now,
 			};
-			AddMessage(message);
+			AddMessage(humanMessage);
 		}
 
         private readonly OpenAiChatService _chatService = new(new AzureOpenAiSettings());
@@ -43,16 +43,16 @@ namespace AIGruppÖvning.ViewModels
         public async void AddCpuReply()
 		{
             // Skicka till OpenAiChatService
-            string reply = await _chatService.SendMessageAsync(messages); // Service konverterar hela listan
+            string cpuReplyText = await _chatService.SendMessageAsync(messages); // Service konverterar hela listan
 
             // Lägg till AI:s svar i ObservableCollection
-            Message message = new()
+            Message cpuMessage = new()
             {
                 Sender = UserType.CPU,
-                Content = reply,
+                Content = cpuReplyText,
                 Timestamp = DateTime.Now
             };
-            AddMessage(message);
+            AddMessage(cpuMessage);
         }
 
         public void AddMessage(object? parameter)
