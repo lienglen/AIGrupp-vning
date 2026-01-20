@@ -1,7 +1,6 @@
 ﻿using AIGruppÖvning.Command;
 using AIGruppÖvning.Enums;
 using AIGruppÖvning.Models;
-using OpenAI.Chat;
 using System.Collections.ObjectModel;
 
 namespace AIGruppÖvning.ViewModels
