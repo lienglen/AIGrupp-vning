@@ -38,7 +38,7 @@ namespace AIGruppÖvning.ViewModels
 			AddMessage(humanMessage);
 		}
 
-        private readonly OpenAiChatService _chatService = new(new AzureOpenAiSettings());
+        private readonly OpenAiChatService _chatService = new();
 
         public async void AddCpuReply()
 		{

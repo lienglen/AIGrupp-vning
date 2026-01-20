@@ -6,15 +6,17 @@ using OpenAI.Chat;
 
 public class OpenAiChatService
 {
+    private readonly AzureOpenAiSettings _settings;
     private readonly ChatClient _chatClient;
 
-    public OpenAiChatService(AzureOpenAiSettings settings)
+    public OpenAiChatService()
     {
+        _settings = new();
         var client = new AzureOpenAIClient(
-            new System.Uri(settings.Endpoint),
-            new AzureKeyCredential(settings.ApiKey));
+            new System.Uri(_settings.Endpoint),
+            new AzureKeyCredential(_settings.ApiKey));
 
-        _chatClient = client.GetChatClient(settings.DeploymentName);
+        _chatClient = client.GetChatClient(_settings.DeploymentName);
     }
 
     public async Task<string> SendMessageAsync(IEnumerable<Message> messages)
